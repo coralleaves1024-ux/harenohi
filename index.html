@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ハレノヒ｜外出安心同行サービス</title>
+<meta name="description" content="介助は不要。でもひとりは不安。そんな外出に寄り添う同行サービス『ハレノヒ』。高齢者・子育て世帯・学生・若い社会人の「誰かと一緒なら行ける」を、横浜からお手伝いします。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 23h20' stroke='%23c9bca3' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M10 23a6 6 0 0 1 12 0z' fill='%23d2662e'/%3E%3Cg stroke='%23d2662e' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M16 13V9M11 15l-2-3M21 15l2-3'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E8;
+    --paper-2:#EFE7D7;
+    --ink:#2A2621;
+    --ink-soft:#5C544A;
+    --sun:#D2662E;
+    --sun-lt:#EC9350;
+    --sun-deep:#A9451A;
+    --sky:#8AA2AD;
+    --moss:#77855A;
+    --line:#DDD2BF;
+    --line-strong:#C9BCA3;
+    --stone:#E3DAC9;
+    --stone-dk:#B4A88F;
+    --night:#211F1B;
+    --night-soft:#8E867A;
+    --lg:#06C755;
+    --lg-dk:#05A548;
+    --mincho:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    --maru:"Zen Maru Gothic","Hiragino Maru Gothic ProN","M PLUS Rounded 1c",sans-serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    --wrap:1180px;
+    --pad:clamp(22px,5vw,64px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    font-family:var(--gothic);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.9;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{text-decoration:none;color:inherit;}
+  ul,ol{margin:0;padding:0;list-style:none;}
+  h1,h2,h3{margin:0;font-weight:600;}
+  img{display:block;max-width:100%;}
+  ::selection{background:var(--sun);color:#fff;}
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
+
+  /* ---------- shared type ---------- */
+  .eyebrow{
+    font-family:var(--maru);font-weight:500;font-size:.72rem;letter-spacing:.3em;
+    color:var(--sun);margin:0 0 .2em;
+  }
+  .eyebrow.light{color:var(--sun-lt);}
+  .sec-no{
+    font-family:var(--mincho);font-weight:500;line-height:1;
+    font-size:clamp(1.9rem,4vw,2.9rem);color:var(--line-strong);
+    display:block;margin-bottom:.55em;
+  }
+  .h2{
+    font-family:var(--mincho);font-weight:600;
+    font-size:clamp(1.65rem,3.7vw,2.85rem);line-height:1.55;letter-spacing:.045em;
+    color:var(--ink);
+  }
+  .lead{
+    margin:1.5em 0 0;color:var(--ink-soft);
+    font-size:clamp(1rem,1.25vw,1.1rem);line-height:2.05;max-width:33em;
+  }
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.55em;
+    font-family:var(--maru);font-weight:700;font-size:.94rem;letter-spacing:.05em;
+    padding:1.05em 2.15em;border-radius:999px;
+    transition:transform .18s ease,background .18s ease;
+  }
+  .btn svg{width:1.15em;height:1.15em;fill:currentColor;flex:none;}
+  .btn-line{background:var(--lg);color:#fff;}
+  .btn-line:hover{background:var(--lg-dk);transform:translateY(-2px);}
+  .link-arrow{
+    font-family:var(--maru);font-weight:500;font-size:.92rem;letter-spacing:.04em;
+    border-bottom:1px solid currentColor;padding-bottom:.35em;transition:color .18s ease;
+  }
+  .link-arrow::after{content:" →";}
+  .link-arrow:hover{color:var(--sun);}
+  .link-arrow.light:hover{color:var(--sun-lt);}
+
+  /* ---------- figure treatment (unified warm grade) ---------- */
+  .fig{position:relative;overflow:hidden;background:var(--stone);}
+  .fig img{width:100%;height:100%;object-fit:cover;
+    filter:saturate(.9) contrast(1.03) brightness(1.01) sepia(.12);}
+  .fig::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(210,102,46,.10),rgba(40,38,34,.05));
+    mix-blend-mode:multiply;}
+
+  /* ---------- horizon divider (brand mark motif) ---------- */
+  .horizon{max-width:var(--wrap);margin:0 auto;height:1px;background:var(--line-strong);position:relative;}
+  .horizon svg{position:absolute;bottom:0;width:48px;aspect-ratio:200/74;transform:translateX(-50%);overflow:visible;}
+  .horizon[data-x="left"] svg{left:18%;}
+  .horizon[data-x="right"] svg{left:82%;}
+
+  .mk .ray{stroke:var(--sun);}
+  .mk .disc{fill:var(--sun);}
+  .mk .base{stroke:var(--line-strong);}
+  .mk .pa{fill:var(--stone-dk);}
+  .mk .pb{fill:var(--sky);}
+
+  /* ---------- header ---------- */
+  #hd{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .3s ease,border-color .3s ease;border-bottom:1px solid transparent;}
+  #hd .bar{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);height:74px;display:flex;align-items:center;justify-content:space-between;gap:2em;}
+  .brand{display:flex;align-items:center;gap:.55em;color:var(--paper);transition:color .3s ease;}
+  .brand svg{width:44px;aspect-ratio:200/96;overflow:visible;}
+  .brand span{font-family:var(--maru);font-weight:700;font-size:1.1rem;letter-spacing:.12em;}
+  #nav{display:flex;gap:clamp(1.1em,2.4vw,2.3em);}
+  #nav a{font-family:var(--maru);font-weight:500;font-size:.84rem;letter-spacing:.09em;color:var(--paper);opacity:.9;transition:color .25s ease,opacity .2s ease;}
+  #nav a:hover{opacity:1;color:var(--sun-lt);}
+  .hd-cta{font-family:var(--maru);font-weight:500;font-size:.82rem;letter-spacing:.08em;color:var(--paper);border:1px solid currentColor;border-radius:999px;padding:.55em 1.3em;transition:all .25s ease;}
+  .hd-cta:hover{background:var(--sun);border-color:var(--sun);color:#fff;}
+  .burger{display:none;flex-direction:column;gap:6px;background:none;border:0;padding:10px 4px;cursor:pointer;color:var(--paper);}
+  .burger span{width:26px;height:2px;background:currentColor;display:block;transition:transform .28s ease,opacity .2s ease;}
+
+  #hd.solid{background:rgba(246,241,232,.94);backdrop-filter:blur(8px);border-bottom-color:var(--line-strong);}
+  #hd.solid .brand,#hd.solid #nav a,#hd.solid .hd-cta,#hd.solid .burger{color:var(--ink);}
+  #hd.solid #nav a{opacity:.82;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:94vh;display:flex;align-items:flex-end;padding:0 0 clamp(56px,9vh,110px);overflow:hidden;}
+  .hero-media{position:absolute;inset:0;z-index:0;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 56%;
+    filter:saturate(.88) contrast(1.02) brightness(.96) sepia(.12);}
+  .hero::after{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(96deg,rgba(24,20,16,.66) 0%,rgba(24,20,16,.34) 42%,rgba(24,20,16,.02) 74%),
+               linear-gradient(0deg,rgba(24,20,16,.5),transparent 46%);}
+  .hero-inner{position:relative;z-index:2;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);width:100%;color:var(--paper);}
+  .hero .eyebrow{color:var(--sun-lt);}
+  .hero-title{font-family:var(--mincho);font-weight:600;letter-spacing:.05em;
+    text-shadow:0 2px 30px rgba(0,0,0,.28);margin:.15em 0 0;}
+  .hero-title .t-sm{display:block;font-size:clamp(1.05rem,2.7vw,1.7rem);font-weight:500;opacity:.94;margin-bottom:.55em;letter-spacing:.08em;}
+  .hero-title .t-lg{display:block;font-size:clamp(2.35rem,6.6vw,4.7rem);line-height:1.45;}
+  .hero-title .accent{color:var(--sun-lt);font-style:normal;}
+  .hero-sub{margin:1.7em 0 0;font-size:clamp(.98rem,1.5vw,1.15rem);line-height:2.1;max-width:30em;opacity:.95;}
+  .hero-cta{margin-top:2.5em;display:flex;align-items:center;gap:1.8em;flex-wrap:wrap;}
+  .v-tag{position:absolute;right:max(12px,2.6vw);top:20vh;z-index:2;writing-mode:vertical-rl;
+    color:var(--paper);opacity:.78;letter-spacing:.32em;font-family:var(--maru);font-weight:500;font-size:.76rem;}
+
+  /* ---------- about ---------- */
+  .about{padding:clamp(72px,12vw,150px) 0;}
+  .about-grid{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);
+    display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(28px,4vw,64px) clamp(32px,6vw,80px);align-items:start;}
+  .about-l{grid-column:1;grid-row:1;max-width:30em;}
+  .about-l p{margin:1.5em 0 0;color:var(--ink-soft);line-height:2.1;font-size:1rem;}
+  .about-fig{grid-column:2;grid-row:1/span 2;align-self:start;aspect-ratio:3/4;margin-top:clamp(0px,3vw,40px);}
+  .pullquote{grid-column:1;grid-row:2;}
+  .pullquote{margin:.4em 0 0;font-family:var(--mincho);font-weight:600;
+    font-size:clamp(1.7rem,4.6vw,3.3rem);line-height:1.55;letter-spacing:.05em;color:var(--ink);}
+  .pullquote::before{content:"";display:block;width:44px;height:2px;background:var(--sun);margin-bottom:.55em;}
+
+  /* ---------- services / 毎日のこと ---------- */
+  .services{background:var(--paper-2);padding:clamp(72px,12vw,150px) 0;}
+  .mv-grid{margin-top:clamp(38px,6vw,72px);display:grid;grid-template-columns:.82fr 1.18fr;
+    gap:clamp(28px,5vw,80px);align-items:start;}
+  .mv-fig{aspect-ratio:3/4;}
+  .svc-list li{display:grid;grid-template-columns:auto 1fr;column-gap:clamp(1em,2.5vw,2em);row-gap:1.1em;
+    padding:1.9em 0;border-top:1px solid var(--line-strong);}
+  .svc-list li:last-child{border-bottom:1px solid var(--line-strong);}
+  .svc-n{font-family:var(--mincho);font-size:1.45rem;color:var(--sun);line-height:1.1;padding-top:.1em;}
+  .svc-list h3{font-family:var(--mincho);font-weight:600;font-size:clamp(1.15rem,1.9vw,1.42rem);letter-spacing:.05em;}
+  .svc-list p{margin:.55em 0 0;color:var(--ink-soft);font-size:.95rem;line-height:1.95;}
+  .svc-thumb{grid-column:2/3;aspect-ratio:16/9;margin-top:.2em;}
+
+  /* ---------- ハレの日のこと ---------- */
+  .hare{padding:clamp(72px,12vw,150px) 0;}
+  .hare-head{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);}
+  .hare-item{max-width:var(--wrap);margin:clamp(44px,8vw,104px) auto 0;padding:0 var(--pad);
+    display:grid;gap:clamp(20px,4vw,54px);align-items:center;}
+  .hare-a{grid-template-columns:1.22fr .78fr;}
+  .hare-b{grid-template-columns:.78fr 1.22fr;}
+  .hare-c{grid-template-columns:1fr;gap:clamp(18px,3vw,30px);}
+  .hare-a .fig,.hare-b .fig{aspect-ratio:4/3;}
+  .hare-c .fig{aspect-ratio:2/1;}
+  .hare-txt h3{font-family:var(--mincho);font-weight:600;font-size:clamp(1.28rem,2.5vw,1.85rem);
+    letter-spacing:.05em;padding-top:.75em;position:relative;}
+  .hare-txt h3::before{content:"";position:absolute;top:0;left:0;width:36px;height:2px;background:var(--sun);}
+  .hare-txt p{margin:1em 0 0;color:var(--ink-soft);line-height:2.05;max-width:28em;}
+  .hare-b .hare-txt{transform:translateY(-14px);}
+  .hare-c .hare-txt{max-width:38em;margin-left:auto;}
+
+  /* ---------- safety (dark) ---------- */
+  .safety{background:var(--night);color:var(--paper);padding:clamp(72px,12vw,150px) 0;}
+  .safety .h2{color:var(--paper);}
+  .safety .sec-no{color:#4B463D;}
+  .safety-list{margin-top:clamp(40px,6vw,72px);display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(40px,7vw,100px);}
+  .safety-list>div{padding:1.55em 0;border-top:1px solid rgba(246,241,232,.16);}
+  .safety-list dt{font-family:var(--maru);font-weight:700;font-size:1.02rem;letter-spacing:.07em;}
+  .safety-list dd{margin:.5em 0 0;color:var(--night-soft);font-size:.9rem;line-height:1.95;}
+
+  /* ---------- scenes ---------- */
+  .scenes{padding:clamp(72px,12vw,150px) 0 clamp(120px,16vw,220px);}
+  .sc-grid{margin-top:clamp(40px,6vw,76px);display:grid;grid-template-columns:1fr 1fr;
+    gap:clamp(30px,4.5vw,60px) clamp(28px,5vw,72px);}
+  .sc-card .fig{aspect-ratio:5/4;}
+  .sc-card figcaption h3{margin-top:1.15em;font-family:var(--mincho);font-weight:600;font-size:1.24rem;letter-spacing:.05em;}
+  .sc-card figcaption p{margin-top:.55em;color:var(--ink-soft);font-size:.92rem;line-height:1.95;}
+  .sc-card.push{transform:translateY(64px);}
+
+  /* ---------- pricing ---------- */
+  .pricing{padding:clamp(72px,12vw,150px) 0;}
+  .pr-list{margin-top:clamp(38px,6vw,68px);border-top:2px solid var(--ink);}
+  .pr-row{display:flex;justify-content:space-between;align-items:baseline;gap:1.5em 2em;
+    padding:clamp(1.5em,3vw,2.4em) 0;border-bottom:1px solid var(--line-strong);flex-wrap:wrap;}
+  .pr-name h3{font-family:var(--mincho);font-weight:600;font-size:clamp(1.15rem,1.9vw,1.42rem);letter-spacing:.05em;}
+  .pr-name p{margin:.4em 0 0;color:var(--ink-soft);font-size:.9rem;}
+  .pr-amt{font-family:var(--mincho);font-weight:600;font-size:clamp(2rem,5vw,3.4rem);color:var(--ink);line-height:1;white-space:nowrap;}
+  .pr-amt .cur{font-size:.44em;color:var(--sun);margin-right:.12em;vertical-align:.08em;}
+  .pr-amt .unit{font-size:.3em;color:var(--ink-soft);font-family:var(--maru);letter-spacing:.05em;margin-left:.5em;}
+  .pr-amt.ask{font-size:clamp(1.3rem,2.6vw,1.85rem);color:var(--sun);}
+  .pr-note{margin:2.4em 0 0;color:var(--ink-soft);font-size:.86rem;line-height:2;max-width:40em;}
+
+  /* ---------- company ---------- */
+  .company{padding:clamp(60px,10vw,120px) 0;}
+  .co-grid{display:grid;grid-template-columns:.66fr 1.34fr;gap:clamp(32px,6vw,90px);align-items:start;}
+  .co-brand svg{width:96px;aspect-ratio:200/96;overflow:visible;}
+  .co-name{font-family:var(--maru);font-weight:700;font-size:1.35rem;letter-spacing:.14em;margin:.6em 0 0;}
+  .co-tag{margin:.35em 0 0;color:var(--ink-soft);font-size:.8rem;letter-spacing:.07em;}
+  .co-dl{margin-top:.4em;}
+  .co-dl>div{display:grid;grid-template-columns:7em 1fr;gap:1em;padding:1.15em 0;border-bottom:1px solid var(--line);font-size:.95rem;}
+  .co-dl dt{color:var(--ink-soft);font-family:var(--maru);font-weight:500;}
+  .co-dl dd{line-height:1.9;}
+
+  /* ---------- contact ---------- */
+  .contact{position:relative;color:var(--paper);overflow:hidden;}
+  .contact .ct-media{position:absolute;inset:0;z-index:0;}
+  .contact .ct-media img{width:100%;height:100%;object-fit:cover;object-position:center 54%;
+    filter:saturate(.85) contrast(1.02) brightness(.8) sepia(.14);}
+  .contact::after{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(175deg,rgba(24,20,16,.5),rgba(24,20,16,.72));}
+  .ct-inner{position:relative;z-index:2;max-width:var(--wrap);margin:0 auto;padding:clamp(96px,16vw,210px) var(--pad);}
+  .ct-title{font-family:var(--mincho);font-weight:600;font-size:clamp(2rem,5.6vw,3.7rem);line-height:1.5;letter-spacing:.05em;margin:.35em 0 0;}
+  .ct-lead{margin:1.4em 0 0;font-size:1.05rem;line-height:2.1;}
+  .ct-actions{margin-top:2.7em;display:flex;flex-direction:column;align-items:flex-start;gap:1.5em;}
+  .ct-hours{font-family:var(--maru);font-size:.86rem;letter-spacing:.06em;opacity:.85;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--paper-2);border-top:1px solid var(--line-strong);}
+  .ft-inner{max-width:var(--wrap);margin:0 auto;padding:clamp(34px,6vw,52px) var(--pad);
+    display:flex;justify-content:space-between;align-items:center;gap:1.4em 2em;flex-wrap:wrap;}
+  .ft-inner .brand{color:var(--ink);}
+  .ft-nav{display:flex;gap:clamp(1.2em,3vw,2em);}
+  .ft-nav a{font-family:var(--maru);font-size:.83rem;letter-spacing:.05em;color:var(--ink-soft);}
+  .ft-nav a:hover{color:var(--sun);}
+  .ft-copy{width:100%;border-top:1px solid var(--line);padding-top:1.5em;margin-top:.3em;
+    font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);}
+
+  /* ---------- reveal ---------- */
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.7,.2,1);}
+    .reveal.in{opacity:1;transform:none;}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .about-grid{grid-template-columns:1fr;}
+    .about-l,.pullquote{grid-column:1;grid-row:auto;}
+    .about-fig{grid-column:1;grid-row:auto;order:-1;aspect-ratio:4/3;margin-top:0;}
+    .pullquote{margin-top:1.4em;}
+    .mv-grid{grid-template-columns:1fr;}
+    .mv-fig{aspect-ratio:16/10;}
+    .svc-thumb{aspect-ratio:16/9;}
+    .hare-a,.hare-b{grid-template-columns:1fr;}
+    .hare-b .fig{order:-1;}
+    .hare-b .hare-txt{transform:none;}
+    .hare-a .fig,.hare-b .fig,.hare-c .fig{aspect-ratio:16/10;}
+    .safety-list{grid-template-columns:1fr;}
+    .sc-grid{grid-template-columns:1fr;gap:clamp(28px,7vw,44px);}
+    .sc-card.push{transform:none;}
+    .scenes{padding-bottom:clamp(72px,12vw,150px);}
+    .co-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:860px){
+    #hd .bar{height:64px;}
+    #nav{position:fixed;left:0;right:0;top:64px;flex-direction:column;gap:0;padding:.6em 0;
+      background:var(--paper);border-bottom:1px solid var(--line-strong);
+      transform:translateY(-135%);transition:transform .32s ease;}
+    #nav.open{transform:translateY(0);}
+    #nav a{color:var(--ink)!important;opacity:1;padding:1.05em var(--pad);font-size:.96rem;
+      letter-spacing:.06em;border-bottom:1px solid var(--line);}
+    #nav a:last-child{border-bottom:0;}
+    .burger{display:flex;}
+    .hd-cta{display:none;}
+    .burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+    .burger.open span:nth-child(2){opacity:0;}
+    .burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+    .v-tag{display:none;}
+    .hero::after{background:linear-gradient(0deg,rgba(24,20,16,.78) 4%,rgba(24,20,16,.28) 52%,rgba(24,20,16,.06) 100%);}
+    .hero-inner{padding-bottom:0;}
+    .horizon[data-x] svg{left:50%!important;}
+    .co-dl>div{grid-template-columns:1fr;gap:.2em;}
+    .pr-amt{font-size:clamp(1.8rem,9vw,2.4rem);}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <symbol id="mark" class="mk" viewBox="0 0 200 96" overflow="visible">
+    <g class="ray" stroke-width="3.4" stroke-linecap="round" fill="none">
+      <line x1="100" y1="30" x2="100" y2="8"/>
+      <line x1="83" y1="33" x2="74" y2="14"/>
+      <line x1="68" y1="43" x2="51" y2="31"/>
+      <line x1="117" y1="33" x2="126" y2="14"/>
+      <line x1="132" y1="43" x2="149" y2="31"/>
+      <line x1="60" y1="57" x2="41" y2="52"/>
+      <line x1="140" y1="57" x2="159" y2="52"/>
+    </g>
+    <path class="disc" d="M64,66 a36,36 0 0 1 72,0 Z"/>
+    <line class="base" x1="6" y1="66" x2="60" y2="66" stroke-width="2.6" stroke-linecap="round"/>
+    <line class="base" x1="140" y1="66" x2="194" y2="66" stroke-width="2.6" stroke-linecap="round"/>
+    <circle class="pa" cx="20" cy="49" r="5.4"/>
+    <circle class="pa" cx="45" cy="66" r="4.4"/>
+    <circle class="pb" cx="155" cy="66" r="4.4"/>
+    <circle class="pb" cx="180" cy="49" r="5.4"/>
+  </symbol>
+  <symbol id="sun" class="mk" viewBox="0 0 200 74" overflow="visible">
+    <g class="ray" stroke-width="3.6" stroke-linecap="round" fill="none">
+      <line x1="100" y1="34" x2="100" y2="10"/>
+      <line x1="82" y1="38" x2="72" y2="17"/>
+      <line x1="67" y1="48" x2="49" y2="35"/>
+      <line x1="118" y1="38" x2="128" y2="17"/>
+      <line x1="133" y1="48" x2="151" y2="35"/>
+      <line x1="58" y1="63" x2="38" y2="58"/>
+      <line x1="142" y1="63" x2="162" y2="58"/>
+    </g>
+    <path class="disc" d="M62,68 a38,38 0 0 1 76,0 Z"/>
+  </symbol>
+</svg>
+
+<header id="hd">
+  <div class="bar">
+    <a class="brand" href="#top"><svg><use href="#mark"/></svg><span>ハレノヒ</span></a>
+    <nav id="nav">
+      <a href="#top">トップ</a>
+      <a href="#services">サービス紹介</a>
+      <a href="#pricing">料金</a>
+      <a href="#company">会社概要</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <a class="hd-cta" href="#contact">相談する</a>
+    <button class="burger" id="burger" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="top">
+  <div class="hero-media"><img src="images/hero.jpg" alt="夕暮れの小道を並んで歩くふたり" fetchpriority="high"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">外出安心同行サービス</p>
+    <h1 class="hero-title">
+      <span class="t-sm">ひとりじゃ不安な外出に、</span>
+      <span class="t-lg">もうひとつの<span class="accent">安心</span>を。</span>
+    </h1>
+    <p class="hero-sub">介助は不要。でもひとりは不安。<br>そんな外出に寄り添う同行サービスです。</p>
+    <div class="hero-cta">
+      <a class="btn btn-line" href="#contact">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.4 4.7 3.6 6.2-.1.6-.6 2.2-.7 2.6-.1.5.2.5.4.4.2-.1 2.6-1.7 3.6-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
+        LINEで相談する
+      </a>
+      <a class="link-arrow" href="tel:0000000000">お電話でのご相談</a>
+    </div>
+  </div>
+  <span class="v-tag">つなぐ移動、ひろがる毎日。</span>
+</section>
+
+<div class="horizon" data-x="left" aria-hidden="true"><svg><use href="#sun"/></svg></div>
+
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-l reveal">
+      <span class="sec-no">01</span>
+      <p class="eyebrow">ハレノヒとは</p>
+      <h2 class="h2">外出安心同行サービス<br>『ハレノヒ』とは</h2>
+      <p>介助は必要ないけれど、ひとりでの外出に不安を感じる方へ。安心のための同行者を提供する、外出支援サービスです。</p>
+      <p>高齢者、子育て世帯、学生、若い社会人まで。それぞれの「行きたい」に、そっと付き添います。</p>
+    </div>
+    <figure class="fig about-fig reveal"><img src="images/about.jpg" alt="腕をまわして並んで歩く祖父と孫" loading="lazy"></figure>
+    <p class="pullquote reveal">誰かと一緒なら、<br>行ける。</p>
+  </div>
+</section>
+
+<div class="horizon" data-x="right" aria-hidden="true"><svg><use href="#sun"/></svg></div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="sec-no">02</span>
+      <p class="eyebrow">毎日のこと</p>
+      <h2 class="h2">日常の「ちょっと不安」に。</h2>
+      <p class="lead">買い物、通院、送り迎え。いつもの外出に、もうひとりぶんの安心を添えます。</p>
+    </div>
+    <div class="mv-grid">
+      <figure class="fig mv-fig reveal"><img src="images/street.jpg" alt="夕方の商店街の角" loading="lazy"></figure>
+      <ol class="svc-list reveal">
+        <li>
+          <span class="svc-n">01</span>
+          <div><h3>日常外出同行</h3><p>買い物・散歩・病院など、日々の外出に同行します。</p></div>
+        </li>
+        <li>
+          <span class="svc-n">02</span>
+          <div><h3>子どもの送迎同行</h3><p>習い事・通院・遊びなど、子どもの外出に安心を添えます。</p></div>
+          <figure class="fig svc-thumb"><img src="images/family-grass.jpg" alt="並木道を歩く親子" loading="lazy"></figure>
+        </li>
+        <li>
+          <span class="svc-n">03</span>
+          <div><h3>学生の外出同行</h3><p>役所・病院・面接など「ひとりで行きづらい」場面をサポート。</p></div>
+        </li>
+        <li>
+          <span class="svc-n">04</span>
+          <div><h3>若者の外出同行</h3><p>はじめての場所や、不安を感じる外出に寄り添います。</p></div>
+          <figure class="fig svc-thumb"><img src="images/city.jpg" alt="街を歩くふたり" loading="lazy"></figure>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="hare">
+  <div class="hare-head reveal">
+    <span class="sec-no">03</span>
+    <p class="eyebrow">ハレの日のこと</p>
+    <h2 class="h2">一年に何度かの、<br>大切な日に。</h2>
+    <p class="lead">式や旅行、特別な予定。緊張する一日こそ、慣れた誰かがそばにいると心強い。</p>
+  </div>
+
+  <div class="hare-item hare-a reveal">
+    <figure class="fig"><img src="images/temple.jpg" alt="紅葉ごしの五重塔" loading="lazy"></figure>
+    <div class="hare-txt">
+      <h3>冠婚葬祭同行</h3>
+      <p>式場までの移動や、会場内でのサポートを行います。慣れない場でも、落ち着いて過ごせるように。</p>
+    </div>
+  </div>
+
+  <div class="hare-item hare-b reveal">
+    <div class="hare-txt">
+      <h3>ゴルフ送迎・ラウンド同行</h3>
+      <p>ゴルフ場への送迎から、ラウンドの同行まで。移動と当日の負担を軽くします。</p>
+    </div>
+    <figure class="fig"><img src="images/golf.jpg" alt="ゴルフコースのグリーン" loading="lazy"></figure>
+  </div>
+
+  <div class="hare-item hare-c reveal">
+    <figure class="fig"><img src="images/car.jpg" alt="車窓から見える新緑の道" loading="lazy"></figure>
+    <div class="hare-txt">
+      <h3>旅行・遠出の同行</h3>
+      <p>日帰りから宿泊まで。安心して過ごせる同行者として、遠くの一日に付き添います。</p>
+    </div>
+  </div>
+</section>
+
+<section class="safety">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="sec-no">04</span>
+      <p class="eyebrow">安心のために</p>
+      <h2 class="h2">お預かりするのは、<br>だれかの大切な一日です。</h2>
+    </div>
+    <dl class="safety-list reveal">
+      <div><dt>本人確認</dt><dd>同行スタッフ全員の身元確認を行っています。</dd></div>
+      <div><dt>研修</dt><dd>接遇と安全に関する研修を実施しています。</dd></div>
+      <div><dt>事故補償</dt><dd>万一に備え、損害保険に加入しています。</dd></div>
+      <div><dt>緊急連絡体制</dt><dd>外出中も連絡が取れる体制を整えています。</dd></div>
+      <div><dt>個人情報保護</dt><dd>お預かりした情報は厳重に管理します。</dd></div>
+      <div><dt>地域との連携</dt><dd>必要に応じて地域包括支援センター等と連携します。</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="scenes">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="sec-no">05</span>
+      <p class="eyebrow">こんな時に</p>
+      <h2 class="h2">「これ、頼めるのかな」<br>と思ったら。</h2>
+    </div>
+    <div class="sc-grid">
+      <figure class="sc-card reveal">
+        <div class="fig"><img src="images/elder-walk.jpg" alt="杖をついて歩く高齢の女性" loading="lazy"></div>
+        <figcaption><h3>高齢者の外出</h3><p>買い物や病院など、ひとりでは不安な外出をサポート。</p></figcaption>
+      </figure>
+      <figure class="sc-card push reveal">
+        <div class="fig"><img src="images/camp.jpg" alt="山道を歩く親子" loading="lazy"></div>
+        <figcaption><h3>子育て世帯</h3><p>仕事で送迎ができないとき、子どもの外出を安心サポート。</p></figcaption>
+      </figure>
+      <figure class="sc-card reveal">
+        <div class="fig"><img src="images/bench.jpg" alt="庭園を並んで歩く年配のふたり" loading="lazy"></div>
+        <figcaption><h3>学生</h3><p>役所・病院・面接など「ひとりで行きづらい」場面を同行。</p></figcaption>
+      </figure>
+      <figure class="sc-card push reveal">
+        <div class="fig"><img src="images/strawberry.jpg" alt="いちご狩りをする手元" loading="lazy"></div>
+        <figcaption><h3>若い社会人</h3><p>はじめての場所でも、安心して外出できます。</p></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="sec-no">06</span>
+      <p class="eyebrow">料金</p>
+      <h2 class="h2">料金案内</h2>
+    </div>
+    <div class="pr-list reveal">
+      <div class="pr-row">
+        <div class="pr-name"><h3>ベーシック同行</h3><p>1時間ごとの日常外出同行</p></div>
+        <p class="pr-amt"><span class="cur">¥</span>3,000<span class="unit">〜 ／ 1時間</span></p>
+      </div>
+      <div class="pr-row">
+        <div class="pr-name"><h3>お子さま送迎同行</h3><p>習い事・通院などの送迎</p></div>
+        <p class="pr-amt"><span class="cur">¥</span>2,500<span class="unit">〜 ／ 1回</span></p>
+      </div>
+      <div class="pr-row">
+        <div class="pr-name"><h3>遠出・旅行同行</h3><p>日帰り〜宿泊、内容により見積り</p></div>
+        <p class="pr-amt ask">要相談</p>
+      </div>
+    </div>
+    <p class="pr-note reveal">記載の料金は目安です。交通費などの実費、遠出・旅行の同行料金は、内容によって変わります。まずはお気軽にご相談ください。</p>
+  </div>
+</section>
+
+<div class="horizon" data-x="left" aria-hidden="true"><svg><use href="#sun"/></svg></div>
+
+<section class="company" id="company">
+  <div class="wrap">
+    <div class="co-grid">
+      <div class="co-brand reveal">
+        <svg><use href="#mark"/></svg>
+        <p class="co-name">ハレノヒ</p>
+        <p class="co-tag">つなぐ移動、ひろがる毎日。</p>
+      </div>
+      <div class="co-body reveal">
+        <span class="sec-no">07</span>
+        <p class="eyebrow">会社概要</p>
+        <dl class="co-dl">
+          <div><dt>代表者</dt><dd>日下部渚</dd></div>
+          <div><dt>所在地</dt><dd>横浜市西区北幸 2-10-28 むつみビル3階</dd></div>
+          <div><dt>事業内容</dt><dd>外出安心同行サービス『ハレノヒ』の企画・運営</dd></div>
+          <div><dt>取り組み</dt><dd>本人確認・研修・事故補償・緊急連絡体制・個人情報保護、地域包括支援センターとの連携</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="ct-media"><img src="images/contact.jpg" alt="夕暮れの道を渡るふたり" loading="lazy"></div>
+  <div class="ct-inner reveal">
+    <p class="eyebrow light">お問い合わせ</p>
+    <h2 class="ct-title">お気軽に、<br>ご相談ください。</h2>
+    <p class="ct-lead">外出の不安、まずはお話だけでも構いません。</p>
+    <div class="ct-actions">
+      <a class="btn btn-line" href="#">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.4 4.7 3.6 6.2-.1.6-.6 2.2-.7 2.6-.1.5.2.5.4.4.2-.1 2.6-1.7 3.6-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
+        LINEで相談する
+      </a>
+      <a class="link-arrow light" href="tel:0000000000">お電話でのご相談</a>
+      <span class="ct-hours">電話受付 ／ 平日 9:00–18:00</span>
+      <a class="link-arrow light" href="#">問い合わせフォーム</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="ft-inner">
+    <a class="brand" href="#top"><svg><use href="#mark"/></svg><span>ハレノヒ</span></a>
+    <nav class="ft-nav">
+      <a href="#company">会社概要</a>
+      <a href="#">プライバシーポリシー</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <p class="ft-copy">© 2026 ハレノヒ</p>
+  </div>
+</footer>
+
+<script>
+  var hd=document.getElementById('hd');
+  var burger=document.getElementById('burger');
+  var nav=document.getElementById('nav');
+
+  function syncHeader(){
+    var atTop=window.scrollY<40;
+    hd.classList.toggle('solid', !atTop || nav.classList.contains('open'));
+  }
+  window.addEventListener('scroll',syncHeader,{passive:true});
+  syncHeader();
+
+  burger.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    burger.classList.toggle('open',open);
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    syncHeader();
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      syncHeader();
+    });
+  });
+
+  if(window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+  }
+</script>
+
+</body>
+</html>
